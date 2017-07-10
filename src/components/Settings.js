@@ -860,7 +860,7 @@ class Settings extends React.Component
     } else {
       $imagePreview = (<img src="placeholder.png" width="100px" height="100px"/>);
     }
-    console.log(this.state.agency);
+    console.log(this.state);
 
     return(
       <div>

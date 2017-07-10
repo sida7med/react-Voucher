@@ -135,20 +135,70 @@ class Facture extends React.Component
 }
 //====================================
 
-class PrintPdf extends React.Component
+class Users extends React.Component
 {
     
     render() {
 
         return (
             <div>
-                
+                  <Menu/>
+                  <div className="bookingForm">
+                  <div className="booking">
+                      <div className="head">
+                      <div className="titre">Users</div>
+                      <div className="space"></div>
+                      <div className="print">New</div>
+                    </div>
+                    <div className="lign">
+                      <div className="tet">
+                      <table rules="all"> 
+                        <thead>
+                        <tr>
+                          <th>No°</th>
+                          <th>Client</th>
+                          <th>Hotel</th>
+                          <th>Nights</th>
+                          <th>Pax</th>
+                          <th>Agent</th>
+                          <th>Booking Date</th>
+                          <th /*colspan="2"*/>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <td>No°</td>
+                          <td>Client</td>
+                          <td>Hotel</td>
+                          <td>Nights</td>
+                          <td>Pax</td>
+                          <td>Agent</td>                         
+                          <td>Booking Date</td>
+                          <td /*colspan="2"*/>Actions</td>
+                        </tbody>  
+                    </table>
+                        </div>
+                      </div>
+                    </div>
+                   </div>  
             </div>
         );
     }
 }
 
+//====================================
 
+class NewUser extends React.Component
+{
+    
+    render() {
+
+        return (
+            <div>
+                  <Menu/>
+            </div>
+        );
+    }
+}
 //====================================
 class App extends React.Component
 {
@@ -161,7 +211,8 @@ class App extends React.Component
         <Route path={"/vouchers"} component={Vouchers}/>
         <Route path={"/invoices"} component={Invoices}/>
         <Route path={"/dashboard"} component={Facture}/>	
-        <Route path={"PdfStyle/:id"} component={PrintPdf}/>
+        <Route path={"/users"} component={Users}/>
+        <Route path={"/users/new"} component={NewUser}/>
         <Route path={"/settings"} component={Settings}/>
 			</Router>
 		);
