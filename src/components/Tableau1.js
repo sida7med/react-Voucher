@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import 'whatwg-fetch';
+import {Router, Route, browserHistory} from "react-router"  ;
 //====================================
 class Tableau1 extends React.Component
 {
@@ -30,7 +31,7 @@ class Tableau1 extends React.Component
 		this.handleTimeWeek=this.handleTimeWeek.bind(this);
 		this.handleTimeMonth=this.handleTimeMonth.bind(this);	
 		this.handleTimeOthers=this.handleTimeOthers.bind(this);
-    this.handlePdf=this.handlePdf.bind(this);	
+    this.handlePdf=this.handlePdf.bind(this);
 	}
 	handleChangeSearch(event)
 	{
@@ -71,11 +72,11 @@ class Tableau1 extends React.Component
 
 	handleEdit(event)
 	{
-		 console.log("handlepdf is working");
+
 	}
 	handleVoucher(event)
 	{
-		 console.log("handlepdf is working");
+     
 	}
 	handleInvoice()
 	{
@@ -103,18 +104,18 @@ class Tableau1 extends React.Component
 
     //     doc.output('dataurl');
       }
+  
 	render()
 	{
     console.log(this.props.options);
     let buttons=[];
-    let key = Math.floor((Math.random()*100)+1);
     if (this.props.options=="all") {
-      buttons.push(<button key={key} className="bouton" onClick={this.handelEdit}>Edit</button>);
-      buttons.push(<button key={key+1} className="bouton" onClick={this.handelVoucher}>Voucher</button>);
-      buttons.push(<button key={key+2} className="bouton" onClick={this.handelInvoice}>Invoice</button>);
+      buttons.push(<button className="bouton" onClick={this.handleEdit}>Edit</button>);
+      buttons.push(<button className="bouton" onClick={this.handleVoucher}>Voucher</button>);
+      buttons.push(<button className="bouton" onClick={this.handleInvoice}>Invoice</button>);
     }
     else{
-      buttons.push(<button key={key} className="bouton" onClick={this.handelPdf}>PDF</button>);
+      buttons.push(<button className="bouton" onClick={this.handlePdf}>PDF</button>);
     }
 
 

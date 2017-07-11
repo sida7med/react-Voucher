@@ -136,10 +136,45 @@ class Facture extends React.Component
 //====================================
 
 class Users extends React.Component
-{
-    
+{ 
+    constructor(props)
+  {
+    super(props);
+    this.state=({users:[]});
+    this.handleNewUser=this.handleNewUser.bind(this);
+    this.handleEdit=this.handleEdit.bind(this);
+  }
+  componentDidMount()
+  {
+    axios.get('http://www.thecocktaildb.com/api/json/v1/1/random.php').then(response=>{
+      this.setState({users:response.data.drinks});
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }
+  handleNewUser(event)
+  {
+    browserHistory.push("users/newuser");
+  }
+  handleEdit(event,id)
+  {
+    event.defaultPrevented;
+    browserHistory.push("users/edituser/"+id);
+  }
+
     render() {
 
+      let users=[{idUser:0,FirstName:"Foulen",LastName:"Ben Foulen",Role:"Admin",Email:"aaaa@gmail.com",Phone:"+22211133300"}
+                    ,{idUser:1,FirstName:"Foulen",LastName:"Ben Foulen",Role:"Agent",Email:"aaaa@gmail.com",Phone:"+22211133300"}];
+
+      let listUsers=users.map((user)=><tr>
+                          <td>{user.FirstName}</td>
+                          <td>{user.LastName}</td>
+                          <td>{user.Role}</td>
+                          <td>{user.Email}</td>
+                          <td>{user.Phone}</td>
+                          <td><button key={Math.floor((Math.random()*100)+1)} className="bouton" onClick={(event)=>this.handleEdit(event,user.idUser)}>Edit</button></td></tr>);              
         return (
             <div>
                   <Menu/>
@@ -148,32 +183,23 @@ class Users extends React.Component
                       <div className="head">
                       <div className="titre">Users</div>
                       <div className="space"></div>
-                      <div className="print">New</div>
+                      <div className="print" onClick={this.handleNewUser}>New</div>
                     </div>
                     <div className="lign">
                       <div className="tet">
                       <table rules="all"> 
                         <thead>
                         <tr>
-                          <th>No°</th>
-                          <th>Client</th>
-                          <th>Hotel</th>
-                          <th>Nights</th>
-                          <th>Pax</th>
-                          <th>Agent</th>
-                          <th>Booking Date</th>
-                          <th /*colspan="2"*/>Actions</th>
+                          <th>FirstName</th>
+                          <th>LastName</th>
+                          <th>Role</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                          <td>No°</td>
-                          <td>Client</td>
-                          <td>Hotel</td>
-                          <td>Nights</td>
-                          <td>Pax</td>
-                          <td>Agent</td>                         
-                          <td>Booking Date</td>
-                          <td /*colspan="2"*/>Actions</td>
+                        {listUsers}
                         </tbody>  
                     </table>
                         </div>
@@ -199,6 +225,22 @@ class NewUser extends React.Component
         );
     }
 }
+
+//====================================
+
+class EditUser extends React.Component
+{
+    
+    render() {
+
+        return (
+            <div>
+                  <Menu/>
+                  <h1>{this.props.params.id}</h1>
+            </div>
+        );
+    }
+}
 //====================================
 class App extends React.Component
 {
@@ -212,7 +254,8 @@ class App extends React.Component
         <Route path={"/invoices"} component={Invoices}/>
         <Route path={"/dashboard"} component={Facture}/>	
         <Route path={"/users"} component={Users}/>
-        <Route path={"/users/new"} component={NewUser}/>
+        <Route path={"/users/newuser"} component={NewUser}/>
+        <Route path={"/users/edituser/:id"} component={EditUser}/>
         <Route path={"/settings"} component={Settings}/>
 			</Router>
 		);

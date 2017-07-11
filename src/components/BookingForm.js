@@ -233,7 +233,7 @@ doc.save('voucher.pdf');
     	<div className="form">
     	<div className="ligne">
     	<div className="box">
-    	<label for="client">
+    	<label htmlFor="client">
     	Client Name
     	</label>
     	<input list="suggestions" id="client" className="client" type="text" value={this.state.valueName} onChange={this.handleChangeName} />
